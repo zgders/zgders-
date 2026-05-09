@@ -15,7 +15,6 @@
         body {
             width: 100vw;
             height: 100vh;
-            /* 直接写死初始背景，避免加载失败 */
             background-image: url("bg1.jpg");
             background-repeat: no-repeat;
             background-position: center center;
@@ -78,9 +77,8 @@
 
     <div class="card">
         <h2 class="title">点击查看推的美照</h2>
-        <a href="https://ys.mihoyo.com/main/m/news/detail/13367" class="link-btn">点击进入</a>
+        <a href="https://ys.mihoyo.com/?utm_source=yuanshen_web" class="link-btn">点击进入</a>
 
-        <!-- 背景切换按钮，确保完整显示 -->
         <div class="bg-group">
             <button onclick="document.body.style.backgroundImage='url(bg1.jpg)'">背景1</button>
             <button onclick="document.body.style.backgroundImage='url(bg2.jpg)'">背景2</button>
