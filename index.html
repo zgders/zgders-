@@ -36,6 +36,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             border: 1px solid rgba(255,255,255,0.15);
+            z-index: 999; /* 强制浮在图片最上层，不会被盖住 */
         }
 
         .title {
@@ -91,7 +92,7 @@
     </style>
 </head>
 <body>
-    <!-- 隐藏音乐播放器 -->
+    <!-- 正确闭合音乐标签 -->
     <audio id="bgMusic" src="music.mp3" loop>
 
     <div class="card">
@@ -103,7 +104,7 @@
             <button onclick="document.body.style.backgroundImage='url(bg2.jpg)'">背景2</button>
         </div>
 
-        <!-- 播放音乐按钮（在背景按钮正下方） -->
+        <!-- 音乐按钮在背景按钮正下方 -->
         <div class="music-group">
             <button id="musicBtn" onclick="toggleMusic()">播放音乐</button>
         </div>
@@ -113,7 +114,6 @@
         const audio = document.getElementById('bgMusic');
         const btn = document.getElementById('musicBtn');
 
-        // 播放/暂停切换
         function toggleMusic() {
             if (audio.paused) {
                 audio.play();
