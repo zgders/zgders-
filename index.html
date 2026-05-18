@@ -2,7 +2,6 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- 关键适配设置：禁止页面缩放，锁定视口 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>南梁的美照</title>
     <style>
@@ -17,7 +16,6 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            /* 强制背景图居中、完整覆盖，避免裁剪偏移 */
             background-image: url("bg1.jpg");
             background-repeat: no-repeat;
             background-position: center center;
@@ -28,13 +26,11 @@
         .card {
             width: 90%;
             max-width: 400px;
-            /* 半透明背景，适配不同亮度的图片 */
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px 25px;
             text-align: center;
-            /* 强制居中定位，修复位置偏移 */
             position: absolute;
             top: 50%;
             left: 50%;
@@ -74,7 +70,11 @@
             gap: 15px;
         }
 
-        .bg-group button {
+        .music-group {
+            margin-top: 20px;
+        }
+
+        .bg-group button, .music-group button {
             padding: 10px 22px;
             border: none;
             border-radius: 25px;
@@ -85,12 +85,14 @@
             transition: background 0.3s ease;
         }
 
-        .bg-group button:hover {
+        .bg-group button:hover, .music-group button:hover {
             background: rgba(255,255,255,0.45);
         }
     </style>
 </head>
 <body>
+    <!-- 隐藏音乐播放器 -->
+    <audio id="bgMusic" src="music.mp3" loop>
 
     <div class="card">
         <h2 class="title">点击查看南梁的美照</h2>
@@ -100,7 +102,27 @@
             <button onclick="document.body.style.backgroundImage='url(bg1.jpg)'">背景1</button>
             <button onclick="document.body.style.backgroundImage='url(bg2.jpg)'">背景2</button>
         </div>
+
+        <!-- 播放音乐按钮（在背景按钮正下方） -->
+        <div class="music-group">
+            <button id="musicBtn" onclick="toggleMusic()">播放音乐</button>
+        </div>
     </div>
 
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicBtn');
+
+        // 播放/暂停切换
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                btn.innerText = '暂停音乐';
+            } else {
+                audio.pause();
+                btn.innerText = '播放音乐';
+            }
+        }
+    </script>
 </body>
 </html>
