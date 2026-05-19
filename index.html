@@ -47,34 +47,49 @@ transition:background 0.3s ease;
 <h2 class="title">点击查看南梁的美照</h2>
 <a href="https://ys.mihoyo.com/?utm_source=yuanshen_web" class="link-btn">点击进入</a>
 <div class="bg-group">
-<button onclick="document.body.style.backgroundImage='url(bg1.jpg)'">背景1</button>
-<button onclick="document.body.style.backgroundImage='url(bg2.jpg)'">背景2</button>
+<button onclick="changeBg1()">背景1</button>
+<button onclick="changeBg2()">背景2</button>
 </div>
 <div class="music-group">
 <button id="musicBtn" onclick="playOnceAudio()">神秘音效</button>
 </div>
 </div>
 
-<audio id="bgMusic" src="music.mp3">
+<!-- 三个独立音频 -->
+<audio id="audioMain" src="music.mp3">
+<audio id="audio2" src="audio2.mp3">
+<audio id="audio3" src="audio3.mp3">
+
 <script>
-const audio = document.getElementById('bgMusic');
+// 主音效：神秘音效按钮
+const audioMain = document.getElementById('audioMain');
 const btn = document.getElementById('musicBtn');
 let isPlaying = false;
 
-// 播放结束自动重置状态
-audio.addEventListener('ended', () => {
-    audio.pause();
-    audio.currentTime = 0;
+audioMain.addEventListener('ended', () => {
+    audioMain.pause();
+    audioMain.currentTime = 0;
     btn.innerText = '神秘音效';
     isPlaying = false;
 });
-
-// 仅播放一次，禁止重复点击
 function playOnceAudio() {
     if(isPlaying) return;
-    audio.play();
+    audioMain.play();
     btn.innerText = '播放中...';
     isPlaying = true;
+}
+
+// 背景1：切换背景 + 播放音频2
+function changeBg1() {
+    document.body.style.backgroundImage='url(bg1.jpg)';
+    audio2.currentTime = 0;
+    audio2.play();
+}
+// 背景2：切换背景 + 播放音频3
+function changeBg2() {
+    document.body.style.backgroundImage='url(bg2.jpg)';
+    audio3.currentTime = 0;
+    audio3.play();
 }
 </script>
 </body>
