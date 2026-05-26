@@ -42,6 +42,45 @@ transition:background 0.3s ease;
 width:180px;
 }
 .bg-group button:hover,.music-group button:hover{background:rgba(255,255,255,0.45);}
+
+/* 视频容器样式 */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+.video-container.active {
+    display: flex;
+}
+#mysteryVideo {
+    max-width: 90%;
+    max-height: 80vh;
+    border: 2px solid #fff;
+}
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.3);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.close-btn:hover {
+    background: rgba(255,255,255,0.5);
+}
 </style>
 </head>
 <body>
@@ -54,8 +93,17 @@ width:180px;
 </div>
 <div class="music-group">
 <button id="musicBtn" onclick="playOnceAudio()">神秘音效</button>
-<button onclick="openMysteryUrl()">神秘网址</button>
+<button onclick="openMysteryVideo()">神秘视频</button>
 </div>
+</div>
+
+<!-- 视频容器 -->
+<div class="video-container" id="videoContainer">
+    <video id="mysteryVideo" controls>
+        <source src="mystery_video.mp4" type="video/mp4">
+        您的浏览器不支持视频播放
+    </video>
+    <button class="close-btn" onclick="closeVideo()">×</button>
 </div>
 
 <!-- 三个独立音频 -->
@@ -92,10 +140,29 @@ function playOnceAudio() {
     });
 }
 
-// 神秘网址跳转
-function openMysteryUrl() {
-    window.open('https://b23.tv/KzpQn5s', '_blank');
+// 神秘视频相关
+const videoContainer = document.getElementById('videoContainer');
+const mysteryVideo = document.getElementById('mysteryVideo');
+
+function openMysteryVideo() {
+    videoContainer.classList.add('active');
+    mysteryVideo.play().catch(err => {
+        console.log('视频播放失败:', err);
+    });
 }
+
+function closeVideo() {
+    videoContainer.classList.remove('active');
+    mysteryVideo.pause();
+    mysteryVideo.currentTime = 0;
+}
+
+// 点击视频容器外部关闭视频
+videoContainer.addEventListener('click', (e) => {
+    if (e.target === videoContainer) {
+        closeVideo();
+    }
+});
 
 // 背景1：切换背景 + 播放音频2
 function changeBg1() {
