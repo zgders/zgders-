@@ -106,10 +106,8 @@ width:180px;
     <button class="close-btn" onclick="closeVideo()">×</button>
 </div>
 
-<!-- 三个独立音频 -->
+<!-- 仅保留主音频 -->
 <audio id="audioMain" src="music.mp3">
-<audio id="audio2" src="audio2.mp3">
-<audio id="audio3" src="audio3.mp3">
 
 <script>
 // 主音效：神秘音效按钮
@@ -164,17 +162,12 @@ videoContainer.addEventListener('click', (e) => {
     }
 });
 
-// 背景1：切换背景 + 播放音频2
+// 背景切换（仅切换背景，不播放音频）
 function changeBg1() {
     document.body.style.backgroundImage='url(bg1.jpg)';
-    audio2.currentTime = 0;
-    audio2.play().catch(err => console.log('音频2播放失败:', err));
 }
-// 背景2：切换背景 + 播放音频3
 function changeBg2() {
     document.body.style.backgroundImage='url(bg2.jpg)';
-    audio3.currentTime = 0;
-    audio3.play().catch(err => console.log('音频3播放失败:', err));
 }
 </script>
 </body>
